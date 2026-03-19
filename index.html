@@ -275,7 +275,7 @@ let cart = {}, currentUser = null, currentFilter = 'all';
 /* ── DISCORD OAUTH ─────────────────────────────────────────────────────────── */
 function startDiscordLogin(e) {
   if (e) e.preventDefault();
-  if (DISCORD_CLIENT_ID === 'YOUR_CLIENT_ID') { showToast('⚠️ Set your Discord Client ID first!','error',4000); return; }
+  if (DISCORD_CLIENT_ID === '1484278871091187772') { showToast('⚠️ Set your Discord Client ID first!','error',4000); return; }
   const state = crypto.randomUUID();
   sessionStorage.setItem('dstate', state);
   sessionStorage.setItem('pcart', JSON.stringify(cart));
