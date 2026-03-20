@@ -190,6 +190,9 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
   <button class="filter-btn" onclick="filterItems('food',this)">🍖 Food</button>
   <button class="filter-btn" onclick="filterItems('tools',this)">🔧 Tools</button>
   <button class="filter-btn" onclick="filterItems('rare',this)">💎 Rare</button>
+  <button class="filter-btn" onclick="filterItems('colored',this)">🎨 Colored</button>
+  <button class="filter-btn" onclick="filterItems('armor',this)">🛡️ Armor</button>
+  <button class="filter-btn" onclick="filterItems('books',this)">📖 Books</button>
 </div>
 
 <div class="shop-section">
@@ -250,25 +253,37 @@ const REDIRECT_URI      = 'https://codingsbetter.github.io/EssentialsDMC/';
 const ITEMS = [
   // price = gold cost | qty = amount the player receives
   // img = item image URL (falls back to emoji if broken)
-  {id:'oak-log',      name:'Oak Logs',        emoji:'🪵', img:'https://minecraft.wiki/images/Oak_Log_JE7_BE2.png',                    qty:64,  cat:'building', rarity:'common',    price:1,   desc:'Perfect for early builds and crafting.'},
-  {id:'stone',        name:'Stone Blocks',    emoji:'🪨', img:'https://minecraft.wiki/images/Stone_JE5.png',                           qty:64,  cat:'building', rarity:'common',    price:1,   desc:'Solid foundation material.'},
-  {id:'glass',        name:'Glass Panes',     emoji:'🔲', img:'https://minecraft.wiki/images/Glass_Pane_JE2_BE2.png',                  qty:64,  cat:'building', rarity:'common',    price:8,   desc:'For windows and decoration.'},
-  {id:'sand',         name:'Sand',            emoji:'🏖️', img:'https://minecraft.wiki/images/Sand_JE4_BE2.png',                        qty:64,  cat:'building', rarity:'common',    price:4,   desc:'Craft into glass or concrete.'},
-  {id:'iron-ore',     name:'Raw Iron',        emoji:'🔩', img:'https://minecraft.wiki/images/Raw_Iron_JE2_BE1.png',                    qty:64,  cat:'ores',     rarity:'rare',      price:40,  desc:'Smelt down for iron ingots.'},
-  {id:'gold-ingot',   name:'Gold Ingots',     emoji:'🟡', img:'https://minecraft.wiki/images/Gold_Ingot_JE4_BE2.png',                  qty:64,  cat:'ores',     rarity:'rare',      price:60,  desc:'Ready for crafting.'},
-  {id:'redstone',     name:'Redstone Dust',   emoji:'🔴', img:'https://minecraft.wiki/images/Redstone_Dust_JE2_BE2.png',               qty:64,  cat:'ores',     rarity:'rare',      price:35,  desc:'Power your contraptions.'},
-  {id:'diamond',      name:'Diamonds',        emoji:'💎', img:'https://minecraft.wiki/images/Diamond_JE3_BE3.png',                     qty:16,  cat:'rare',     rarity:'legendary', price:200, desc:'The ultimate crafting resource.'},
-  {id:'emerald',      name:'Emeralds',        emoji:'💚', img:'https://minecraft.wiki/images/Emerald_JE3_BE3.png',                     qty:16,  cat:'rare',     rarity:'legendary', price:150, desc:'Trade with villagers.'},
-  {id:'nether-star',  name:'Nether Star',     emoji:'⭐', img:'https://minecraft.wiki/images/Nether_Star_JE1_BE1.png',                 qty:1,   cat:'rare',     rarity:'legendary', price:500, desc:'Craft a beacon.'},
-  {id:'bread',        name:'Bread',           emoji:'🍞', img:'https://minecraft.wiki/images/Bread_JE2_BE2.png',                       qty:64,  cat:'food',     rarity:'common',    price:10,  desc:'Keep your hunger bar full.'},
-  {id:'cooked-beef',  name:'Cooked Beef',     emoji:'🥩', img:'https://minecraft.wiki/images/Cooked_Beef_JE3_BE3.png',                 qty:64,  cat:'food',     rarity:'rare',      price:25,  desc:'Best food in the game.'},
-  {id:'golden-apple', name:'Golden Apple',    emoji:'🍎', img:'https://minecraft.wiki/images/Golden_Apple_JE2_BE2.png',                qty:8,   cat:'food',     rarity:'epic',      price:80,  desc:'Regeneration on demand.'},
-  {id:'enchant-apple',name:'Enchanted Apple', emoji:'🍏', img:'https://minecraft.wiki/images/Enchanted_Golden_Apple_JE3_BE3.png',      qty:1,   cat:'rare',     rarity:'legendary', price:400, desc:'God apple. Strongest food item.'},
-  {id:'sword',        name:'Diamond Sword',   emoji:'⚔️', img:'https://minecraft.wiki/images/Diamond_Sword_JE3_BE3.png',               qty:1,   cat:'tools',    rarity:'epic',      price:180, desc:'Sharpness V, enchanted.'},
-  {id:'pickaxe',      name:'Diamond Pickaxe', emoji:'⛏️', img:'https://minecraft.wiki/images/Diamond_Pickaxe_JE3_BE3.png',             qty:1,   cat:'tools',    rarity:'epic',      price:160, desc:'Efficiency V, Fortune III.'},
-  {id:'elytra',       name:'Elytra',          emoji:'🪽', img:'https://minecraft.wiki/images/Elytra_item_JE3.gif',                     qty:1,   cat:'rare',     rarity:'legendary', price:600, desc:'Soar through the skies.'},
-  {id:'shulker',      name:'Shulker Box',     emoji:'📦', img:'https://minecraft.wiki/images/Purple_Shulker_Box_JE2_BE2.png',          qty:1,   cat:'tools',    rarity:'rare',      price:120, desc:'Portable storage solution.'},
-];
+// ── BUILDING — Natural ──────────────────────────────────────────────────────
+{id:'cobblestone',          name:'Cobblestone',            emoji:'🪨', img:'https://minecraft.wiki/images/Cobblestone_JE6.png',                         qty:128, cat:'building', rarity:'common',    price:1,   desc:'Classic cobblestone for rustic builds.'},
+{id:'stone-bricks',         name:'Stone Bricks',           emoji:'🧱', img:'https://minecraft.wiki/images/Stone_Bricks_JE4.png',                        qty:128, cat:'building', rarity:'common',    price:1,   desc:'Elegant blocks for medieval builds.'},
+{id:'cracked-stone-bricks', name:'Cracked Stone Bricks',   emoji:'🧱', img:'https://minecraft.wiki/images/Cracked_Stone_Bricks_JE2.png',                qty:128, cat:'building', rarity:'common',    price:1,   desc:'Weathered blocks for rustic designs.'},
+{id:'deepslate',            name:'Deepslate',               emoji:'⬛', img:'https://minecraft.wiki/images/Deepslate_JE2.png',                           qty:128, cat:'building', rarity:'common',    price:1,   desc:'Dark blocks for underground builds.'},
+{id:'dirt',                 name:'Dirt',                    emoji:'🟫', img:'https://minecraft.wiki/images/Dirt_JE2_BE2.png',                            qty:128, cat:'building', rarity:'common',    price:1,   desc:'Basic dirt blocks for landscaping.'},
+{id:'sandstone',            name:'Sandstone',               emoji:'🟨', img:'https://minecraft.wiki/images/Sandstone_JE3.png',                           qty:128, cat:'building', rarity:'common',    price:1,   desc:'Smooth blocks for desert structures.'},
+{id:'chiseled-sandstone',   name:'Chiseled Sandstone',      emoji:'🟨', img:'https://minecraft.wiki/images/Chiseled_Sandstone_JE3.png',                  qty:128, cat:'building', rarity:'common',    price:1,   desc:'Detailed blocks for ornate designs.'},
+{id:'smooth-sandstone',     name:'Smooth Sandstone',        emoji:'🟨', img:'https://minecraft.wiki/images/Smooth_Sandstone_JE2.png',                    qty:128, cat:'building', rarity:'common',    price:1,   desc:'Polished blocks for clean aesthetics.'},
+{id:'diorite',              name:'Diorite',                  emoji:'⬜', img:'https://minecraft.wiki/images/Diorite_JE2.png',                             qty:128, cat:'building', rarity:'common',    price:1,   desc:'Light-colored blocks for clean aesthetics.'},
+{id:'polished-diorite',     name:'Polished Diorite',         emoji:'⬜', img:'https://minecraft.wiki/images/Polished_Diorite_JE3.png',                    qty:128, cat:'building', rarity:'common',    price:1,   desc:'Smooth blocks for elegant structures.'},
+{id:'andesite',             name:'Andesite',                 emoji:'🩶', img:'https://minecraft.wiki/images/Andesite_JE2.png',                            qty:128, cat:'building', rarity:'common',    price:1,   desc:'Durable blocks for rugged builds.'},
+{id:'polished-andesite',    name:'Polished Andesite',        emoji:'🩶', img:'https://minecraft.wiki/images/Polished_Andesite_JE4.png',                   qty:128, cat:'building', rarity:'common',    price:1,   desc:'Refined blocks for sleek designs.'},
+{id:'bricks',               name:'Bricks',                   emoji:'🧱', img:'https://minecraft.wiki/images/Bricks_JE4.png',                              qty:128, cat:'building', rarity:'common',    price:1,   desc:'Classic blocks for traditional builds.'},
+
+// ── BUILDING — Colored ──────────────────────────────────────────────────────
+{id:'concrete',             name:'Concrete',                 emoji:'🟦', img:'https://minecraft.wiki/images/Blue_Concrete_JE1_BE1.png',                   qty:128, cat:'colored',  rarity:'common',    price:1,   desc:'Vibrant blocks in all 16 colors. Specify color in notes.'},
+{id:'wool',                 name:'Wool',                     emoji:'🟪', img:'https://minecraft.wiki/images/Purple_Wool_JE2_BE2.png',                     qty:128, cat:'colored',  rarity:'common',    price:1,   desc:'Soft colorful wool blocks. Specify color in notes.'},
+{id:'terracotta',           name:'Terracotta',               emoji:'🟫', img:'https://minecraft.wiki/images/Brown_Terracotta_JE2_BE2.png',                qty:128, cat:'colored',  rarity:'common',    price:1,   desc:'Beautiful terracotta in various colors. Specify color in notes.'},
+{id:'plain-terracotta',     name:'Plain Terracotta',         emoji:'🟤', img:'https://minecraft.wiki/images/Terracotta_JE2_BE2.png',                      qty:128, cat:'colored',  rarity:'common',    price:1,   desc:'Classic terracotta for construction.'},
+
+// ── ARMOR ───────────────────────────────────────────────────────────────────
+{id:'netherite-armor',      name:'Netherite Armor',          emoji:'🛡️', img:'https://minecraft.wiki/images/Netherite_Chestplate_JE2_BE1.png',            qty:1,   cat:'armor',    rarity:'legendary', price:50,  desc:'Max enchanted netherite piece. Specify helmet/chest/legs/boots in notes.'},
+{id:'diamond-armor',        name:'Diamond Armor',            emoji:'🛡️', img:'https://minecraft.wiki/images/Diamond_Chestplate_JE3_BE2.png',              qty:1,   cat:'armor',    rarity:'epic',      price:30,  desc:'Full enchanted diamond piece. Specify helmet/chest/legs/boots in notes.'},
+
+// ── WEAPONS & TOOLS ─────────────────────────────────────────────────────────
+{id:'trident',              name:'Trident',                  emoji:'🔱', img:'https://minecraft.wiki/images/Trident_JE2_BE2.png',                         qty:1,   cat:'tools',    rarity:'legendary', price:170, desc:'Powerful thrown weapon for melee and ranged combat.'},
+
+// ── ENCHANTED BOOKS ─────────────────────────────────────────────────────────
+{id:'mending',              name:'Mending',                  emoji:'📖', img:'https://minecraft.wiki/images/Enchanted_Book_JE2_BE2.png',                  qty:1,   cat:'books',    rarity:'legendary', price:5,   desc:'Repair gear with XP orbs. Essential for long-term maintenance.'},
+{id:'armor-trim',           name:'Armor Trim',               emoji:'📜', img:'https://minecraft.wiki/images/Smithing_Template_JE2_BE1.png',               qty:1,   cat:'books',    rarity:'epic',      price:12,  desc:'Customize your armor with unique designs. Specify trim in notes.'},
 
 let cart = {}, currentUser = null, currentFilter = 'all';
 
